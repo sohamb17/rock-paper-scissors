@@ -14,22 +14,57 @@ function capitalize(string) {
 function playRound(playerSelection, computerSelection) {
     if(playerSelection === "Rock") {
         if(computerSelection === "Scissors") {
-            return "You Win! Rock beats Scissors";
+            console.log("You Win! Rock beats Scissors");
+            return 1;
         } else if(computerSelection === "Paper") {
-            return "You Lose! Paper beats Rock";
+            console.log("You Lose! Paper beats Rock");
+        } else if(computerSelection === "Rock") {
+            console.log("Draw");
         }
+        return 0;
     } else if(playerSelection === "Paper") {
         if(computerSelection === "Rock") {
-            return "You Win! Paper beats Rock";
+            console.log("You Win! Paper beats Rock");
+            return 1;
         } else if(computerSelection === "Scissors") {
-            return "You Lose! Scissors beat Paper";
+            console.log("You Lose! Scissors beat Paper");
+        } else if(computerSelection === "Paper") {
+            console.log("Draw");
         }
+        return 0;
     } else if(playerSelection === "Scissors") {
         if(computerSelection === "Paper") {
-            return "You Win! Scissors beat Paper";
+            console.log("You Win! Scissors beat Paper");
+            return 1;
         } else if(computerSelection === "Rock") {
-            return "You Lose! Rock beats Scissors";
+            console.log("You Lose! Rock beats Scissors");
+        } else if(computerSelection === "Scissors") {
+            console.log("Draw");
+        }
+        return 0;
+    }
+}
+
+function game() {
+    let playerTotalScore = 0;
+    let computerTotalScore = 0;
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = capitalize(prompt(`Score: ${playerTotalScore}\nChoose one:\nRock\nPaper\nScissors`));
+        const computerSelection = capitalize(computerPlay());
+        playerRoundScore = playRound(playerSelection, computerSelection);
+        if(playerRoundScore === 1) {
+            playerTotalScore++;
+        }
+        else if(playerSelection !== computerSelection) {
+            computerTotalScore++;
         }
     }
-    return "Draw";
+    if(playerTotalScore > computerTotalScore) {
+        console.log("Yay! You won the game!");
+    }
+    else {
+        console.log("You lost the game :(\nBetter luck next time.");
+    }
 }
+
+game();
