@@ -1,0 +1,1 @@
+Create a working model of the famous game 'Rock Paper Scissors' in JavaScript.
