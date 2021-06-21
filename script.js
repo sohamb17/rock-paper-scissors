@@ -12,6 +12,7 @@ function capitalize(string) {
 }
 
 const div = document.querySelector("div");
+div.style.whiteSpace = 'pre-line';
 
 function playRound(playerSelection, computerSelection) {
     if(playerSelection === "Rock") {
@@ -47,12 +48,36 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-/* rock.addEventListener('click', () => playRound("Rock", computerPlay()));
-paper.addEventListener('click', () => playRound("Paper", computerPlay()));
-scissors.addEventListener('click', () => playRound("Scissors", computerPlay())); */
+function game() {
+    let playerTotalScore = 0;
+    let computerTotalScore = 0;
 
-const buttons = document.querySelectorAll('button');
+    const buttons = document.querySelectorAll('button');
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => playRound(`${capitalize(button.id)}`, computerPlay()));
-});
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const playerSelection = capitalize(button.id);
+            const computerSelection = capitalize(computerPlay());
+            playerRoundScore = playRound(playerSelection, computerSelection);
+            if(playerRoundScore === 1) {
+                playerTotalScore++;
+            }
+            else if(playerSelection !== computerSelection) {
+                computerTotalScore++;
+            }
+            div.textContent += `\nPlayer: ${playerTotalScore}\t\tComputer: ${computerTotalScore}`
+            if(playerTotalScore === 5) {
+                div.textContent += "\nYay! You won the game!";
+                playerTotalScore = 0;
+                computerTotalScore = 0;
+            }
+            else if (computerTotalScore === 5){
+                div.textContent += "\nYou lost the game :(\nBetter luck next time.";
+                playerTotalScore = 0;
+                computerTotalScore = 0;
+            }
+        });
+    });
+}
+
+game();
