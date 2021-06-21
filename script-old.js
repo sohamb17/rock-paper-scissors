@@ -45,12 +45,26 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-/* rock.addEventListener('click', () => playRound("Rock", computerPlay()));
-paper.addEventListener('click', () => playRound("Paper", computerPlay()));
-scissors.addEventListener('click', () => playRound("Scissors", computerPlay())); */
+function game() {
+    let playerTotalScore = 0;
+    let computerTotalScore = 0;
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = capitalize(prompt(`Score: ${playerTotalScore}\nChoose one:\nRock\nPaper\nScissors`));
+        const computerSelection = capitalize(computerPlay());
+        playerRoundScore = playRound(playerSelection, computerSelection);
+        if(playerRoundScore === 1) {
+            playerTotalScore++;
+        }
+        else if(playerSelection !== computerSelection) {
+            computerTotalScore++;
+        }
+    }
+    if(playerTotalScore > computerTotalScore) {
+        console.log("Yay! You won the game!");
+    }
+    else {
+        console.log("You lost the game :(\nBetter luck next time.");
+    }
+}
 
-const buttons = document.querySelectorAll('button');
-
-buttons.forEach(button => {
-    button.addEventListener('click', () => playRound(`${capitalize(button.id)}`, computerPlay()));
-});
+game();
